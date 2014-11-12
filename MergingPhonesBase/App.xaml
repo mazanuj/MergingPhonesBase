@@ -1,8 +1,16 @@
 ﻿<Application x:Class="MergingPhonesBase.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             xmlns:mergingPhonesBase="clr-namespace:MergingPhonesBase"
+             xmlns:converters="clr-namespace:MergingPhonesBase.Converters">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <mergingPhonesBase:AppBootstrapper x:Key="bootstrapper"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
