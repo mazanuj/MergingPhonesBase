@@ -20,6 +20,7 @@ namespace MergingPhonesBase.ViewModels
     {
         private string inputFile, baseFile;
         private string labelStatus = "NOTHING";
+        private string labelTels = "-";
         private bool canButtonFile = true;
         private bool canButtonDB = true;
 
@@ -75,6 +76,16 @@ namespace MergingPhonesBase.ViewModels
             }
         }
 
+        public string LabelTels
+        {
+            get { return labelTels; }
+            set
+            {
+                labelTels = value;
+                NotifyOfPropertyChange(() => LabelTels);
+            }
+        }
+
         public void ButtonFile()
         {
             var dlg = new OpenFileDialog
@@ -105,6 +116,8 @@ namespace MergingPhonesBase.ViewModels
                 return;
 
             baseFile = dlg.FileName;
+            LabelTels = DataXmlWorker.GetTels(baseFile).Count.ToString();
+
             ChangeBaseFileLabelStatus(true);
             GetButtonStartEnabledStatus();
         }
@@ -175,6 +188,7 @@ namespace MergingPhonesBase.ViewModels
                 .Where(x => x != null), baseFile);
 
             GetButtonStartEnabledStatus();
+            LabelTels = DataXmlWorker.GetTels(baseFile).Count.ToString();
             LabelStatus = "COMPLETE";
         }
     }
